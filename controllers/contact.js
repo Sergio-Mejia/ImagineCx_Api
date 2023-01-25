@@ -1,11 +1,13 @@
 const { response } = require( 'express' )
 const axios = require('axios')
 
+const url = 'https://ICXCandidate:Welcome2022@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/contacts';
+
 const contactGet = (req, res = response) => {
 
-    // const url = 'https://ICXCandidate:Welcome2022@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/contacts';
+    const { id } = req.params;
     axios
-        .get('https://ICXCandidate:Welcome2022@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/contacts/45')
+        .get( `${url}/${id}` )
         .then(( result ) => {
             res.json({
                     id : result.data.id,
@@ -18,17 +20,6 @@ const contactGet = (req, res = response) => {
                 })
         })
         .catch( e => console.log(e))
-
-
-
-    
-    // const { q, nombre = 'No name', apikey} = req.query
-    // res.json({
-    //     msg: "Get Controlador",
-    //     q,
-    //     nombre,
-    //     apikey
-    // })
 }
 
 
@@ -43,9 +34,16 @@ const contactPut = (req, res = response ) => {
 }
 
 const contactDelete = (req, res = response) => {
-    res.json({
-        msg: "Delete Controlador"
-    })
+    const { id } = req.params;
+    axios
+        .delete( `${url}/${id}`)
+        .then(( result ) => {
+            res.json({
+                msg: `User ${id} deleted`
+            })
+        })
+        .catch( e => console.log( e ))
+
 }
 
 
