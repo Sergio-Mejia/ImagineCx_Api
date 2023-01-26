@@ -29,7 +29,10 @@ class Server {
     routes() {
         //Que necesito llamar? -> require('../routes/user')
        this.app.use(this.usersPath, require('../routes/contact'));
+     
     }
+
+   
 
     listen(){
         this.app.listen( this.port , () => {

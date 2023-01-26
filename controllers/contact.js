@@ -1,7 +1,7 @@
 const { response } = require('express')
 const axios = require('axios')
 
-const url = 'https://ICXCandidate:Welcome2022@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/contacts';
+const url = `https://${process.env.USER}:${process.env.PASSWORD}@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/contacts`;
 
 
 const contactGet = (req, res = response) => {
@@ -26,10 +26,8 @@ const contactGetbyId = (req, res = response) => {
             res.json({
                 id: result.data.id,
                 name: result.data.lookupName,
-                direction: {
-                    city: result.data.address.city,
-                    address: result.data.address.street
-                },
+                city: result.data.address.city,
+                address: result.data.address.street,
                 work: result.data.source.lookupName
             })
         })
@@ -38,13 +36,25 @@ const contactGetbyId = (req, res = response) => {
 
 
 
-const contactPut = (req, res = response) => {
+const contactPatch = (req, res = response) => {
 
     const { id } = req.params;
-    res.status(400).json({
-        msg: "Put Controlador",
-        id
-    })
+    const { city, postalCode, street } = req.body.address;
+    axios
+        .patch(`${url}/${id}`, {
+            "address": {
+                "city": city,
+                "postalCode": postalCode,
+                "street": street
+            }
+        })
+        .then((result) => {
+            res.json({
+                msg: `Usuario ${id} actualizado`
+            })
+        })
+        .catch(error => console.log(error))
+
 }
 
 const contactDelete = (req, res = response) => {
@@ -64,6 +74,6 @@ const contactDelete = (req, res = response) => {
 module.exports = {
     contactGet,
     contactGetbyId,
-    contactPut,
+    contactPatch,
     contactDelete
 }
