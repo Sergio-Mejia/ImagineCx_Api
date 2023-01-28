@@ -31,12 +31,11 @@ class Server {
         this.app.use(this.usersPath, require('../routes/contact'));
 
         //manejo de rutas inexistentes
-        this.app.use((req, res, next) => {
+        this.app.use('*' ,(req, res, next) => {
             res.status(404).json({
                 msg: "La ruta especificada no existe en la aplicacion"
             })
         });
-
     }
 
 
@@ -46,7 +45,6 @@ class Server {
             console.log('Server Running port', this.port);
         })
     }
-
 
 }
 

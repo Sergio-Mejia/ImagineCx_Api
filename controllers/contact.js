@@ -8,11 +8,15 @@ const contactGet = (req, res = response) => {
     axios
         .get(url)
         .then((result) => {
-            res.json({ 
+            res.status(200).json({
                 contacts: result.data.items
             })
         })
-        .catch(error => console.log(error)) 
+        .catch((error) => {
+            res.status(500).json({
+                error: error.message
+            })
+        })
 }
 
 
@@ -23,7 +27,7 @@ const contactGetbyId = (req, res = response) => {
     axios
         .get(`${url}/${id}`)
         .then((result) => {
-            res.json({
+            res.status(200).json({
                 id: result.data.id,
                 name: result.data.lookupName,
                 createdTime: result.data.createdTime,
@@ -33,11 +37,16 @@ const contactGetbyId = (req, res = response) => {
                 work: result.data.source.lookupName
             })
         })
-        .catch((e) => {
-            console.log(e)
-            res.json({
-                res: `El id ${id} no se encuentra registrado`
-            })  
+        .catch((error) => {
+            if (error.response.status === 404) {
+                res.status(404).json({
+                    error: `El contacto ${id} no está registrado`
+                })
+            } else {
+                res.status(500).json({
+                    error: error.message
+                })
+            }
         })
 }
 
@@ -56,11 +65,21 @@ const contactPatch = (req, res = response) => {
             }
         })
         .then((result) => {
-            res.json({
+            res.status(200).json({  
                 msg: `Usuario ${id} actualizado`
             })
         })
-        .catch(error => console.log(error))
+        .catch((error) => {
+            if (error.response.status === 404) {
+                res.status(404).json({
+                    error: `El contacto ${id} no está registrado`
+                })
+            } else {
+                res.status(500).json({
+                    error: error.message
+                })
+            }
+        })
 
 }
 
@@ -71,10 +90,20 @@ const contactDelete = (req, res = response) => {
         .then((result) => {
             res.status(200).json({
                 msg: `User ${id} deleted`,
-                lista : result.data
+                lista: result.data
             })
         })
-        .catch(e => console.log(e))
+        .catch((error) => {
+            if (error.response.status === 404) {
+                res.status(404).json({
+                    error: `El contacto ${id} no está registrado`
+                })
+            } else {
+                res.status(500).json({
+                    error: error.message
+                })
+            }
+        })
 
 }
 
