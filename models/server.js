@@ -29,6 +29,7 @@ class Server {
     routes() {
         //Que necesito llamar? -> require('../routes/user')
         this.app.use(this.usersPath, require('../routes/contact'));
+        this.app.use(this.usersPath, require('../routes/accounts'));
 
         //manejo de rutas inexistentes
         this.app.use('*' ,(req, res, next) => {

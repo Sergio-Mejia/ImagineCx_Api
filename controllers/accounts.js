@@ -1,15 +1,15 @@
 const { response } = require('express')
 const axios = require('axios')
 
-const url = `https://${process.env.USER}:${process.env.PASSWORD}@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/contacts`;
+const url = `https://${process.env.USER}:${process.env.PASSWORD}@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/accounts`;
 
 
-const contactGet = (req, res = response) => {
+const accountsGet = (req, res = response) => {
     axios
         .get(url)
         .then((result) => {
             res.status(200).json({
-                contacts: result.data.items
+                accounts: result.data
             })
         })
         .catch((error) => {
@@ -19,9 +19,7 @@ const contactGet = (req, res = response) => {
         })
 }
 
-
-
-const contactGetbyId = (req, res = response) => {
+const accountGetbyId = (req, res = response) => {
 
     const { id } = req.params;
     axios
@@ -29,18 +27,23 @@ const contactGetbyId = (req, res = response) => {
         .then((result) => {
             res.status(200).json({
                 id: result.data.id,
-                name: result.data.lookupName,
-                createdTime: result.data.createdTime,
-                updatedTime: result.data.updatedTime,
-                city: result.data.address.city,
-                address: result.data.address.street,
-                work: result.data.source.lookupName
+                name : result.data.lookupName,
+                login: result.data.login,
+                notification: result.data.emailNotification.lookupName,
+                staff: {
+                    id: result.data.staffGroup.id,
+                    name: result.data.staffGroup.lookupName
+                },
+                perfil: {
+                    id: result.data.profile.id,
+                    name: result.data.profile.lookupName
+                }
             })
         })
         .catch((error) => {
             if (error.response.status === 404) {
                 res.status(404).json({
-                    error: `El contacto ${id} no está registrado`
+                    error: `La cuenta ${id} no está registrada`
                 })
             } else {
                 res.status(500).json({
@@ -50,29 +53,22 @@ const contactGetbyId = (req, res = response) => {
         })
 }
 
-
-
-const contactPatch = (req, res = response) => {
+const accountPatch = (req, res = response) => {
 
     const { id } = req.params;
-    const { city, postalCode, street } = req.body.address;
     axios
         .patch(`${url}/${id}`, {
-            "address": {
-                "city": city,
-                "postalCode": postalCode,
-                "street": street
-            }
-        })
+            "login": req.body.login
+          })
         .then((result) => {
             res.status(200).json({  
-                msg: `Usuario ${id} actualizado`
+                msg: `Cuenta ${id} actualizada`,
             })
         })
         .catch((error) => {
             if (error.response.status === 404) {
                 res.status(404).json({
-                    error: `El contacto ${id} no está registrado`
+                    error: `La cuenta ${id} no está registrada`
                 })
             } else {
                 res.status(500).json({
@@ -82,20 +78,19 @@ const contactPatch = (req, res = response) => {
         })
 }
 
-const contactDelete = (req, res = response) => {
+const accountDelete = (req, res = response) => {
     const { id } = req.params;
     axios
         .delete(`${url}/${id}`)
         .then((result) => {
             res.status(200).json({
-                msg: `User ${id} deleted`,
-                lista: result.data
+                msg: `Account ${id} deleted`,
             })
         })
         .catch((error) => {
             if (error.response.status === 404) {
                 res.status(404).json({
-                    error: `El contacto ${id} no está registrado`
+                    error: `La cuenta ${id} no está registrada`
                 })
             } else {
                 res.status(500).json({
@@ -107,9 +102,10 @@ const contactDelete = (req, res = response) => {
 }
 
 
+
 module.exports = {
-    contactGet,
-    contactGetbyId,
-    contactPatch,
-    contactDelete
+    accountsGet,
+    accountGetbyId,
+    accountPatch,
+    accountDelete
 }

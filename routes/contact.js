@@ -14,12 +14,6 @@ router.get('/contact/:id',contactGetbyId);
 router.patch('/contact/:id', contactPatch);
 
 router.delete('/contact/:id', contactDelete);
-// router.get('*', (req, res) => {
-//     res.json({
-//         msg: " Ruta no existe"
-//     })
-// })
-
 
 
 module.exports = router; 
