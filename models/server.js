@@ -12,31 +12,38 @@ class Server {
         this.middlewares();
 
         //Rutas app
-        this.routes();  
+        this.routes();
     }
 
-    middlewares(){
+    middlewares() {
         //Config CORS
         this.app.use(cors());
 
         //Lectura y parse del body
-        this.app.use( express.json() );
+        this.app.use(express.json());
 
         //Directorio publico
-        this.app.use( express.static('public'));
+        this.app.use(express.static('public'));
     }
 
     routes() {
         //Que necesito llamar? -> require('../routes/user')
-       this.app.use(this.usersPath, require('../routes/contact'));
-     
+        this.app.use(this.usersPath, require('../routes/contact'));
+
+        //manejo de rutas inexistentes
+        this.app.use((req, res, next) => {
+            res.status(404).json({
+                msg: "La ruta especificada no existe en la aplicacion"
+            })
+        });
+
     }
 
-   
 
-    listen(){
-        this.app.listen( this.port , () => {
-            console.log('Server Running port', this.port); 
+
+    listen() {
+        this.app.listen(this.port, () => {
+            console.log('Server Running port', this.port);
         })
     }
 
