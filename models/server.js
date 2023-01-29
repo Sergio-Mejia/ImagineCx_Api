@@ -30,8 +30,9 @@ class Server {
         //Que necesito llamar? -> require('../routes/user')
         this.app.use(this.usersPath, require('../routes/contact'));
         this.app.use(this.usersPath, require('../routes/accounts'));
+        this.app.use(this.usersPath, require('../routes/report'));
 
-        //manejo de rutas inexistentes
+        // manejo de rutas inexistentes
         this.app.use('*' ,(req, res, next) => {
             res.status(404).json({
                 msg: "La ruta especificada no existe en la aplicacion"

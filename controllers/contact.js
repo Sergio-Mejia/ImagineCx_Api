@@ -20,7 +20,6 @@ const contactGet = (req, res = response) => {
 }
 
 
-
 const contactGetbyId = (req, res = response) => {
 
     const { id } = req.params;
