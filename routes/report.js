@@ -10,4 +10,4 @@ router.get('/reports', reportsGet);
 router.get('/reports/:id', reportGetbyId);
 
 
-module.exports = router;
+module.exports = router; 

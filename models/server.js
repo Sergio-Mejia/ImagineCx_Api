@@ -31,6 +31,7 @@ class Server {
         this.app.use(this.usersPath, require('../routes/contact'));
         this.app.use(this.usersPath, require('../routes/accounts'));
         this.app.use(this.usersPath, require('../routes/report'));
+        this.app.use(this.usersPath, require('../routes/assetStatus'));
 
         // manejo de rutas inexistentes
         this.app.use('*' ,(req, res, next) => {

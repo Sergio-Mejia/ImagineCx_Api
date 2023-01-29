@@ -9,7 +9,7 @@ const accountsGet = (req, res = response) => {
         .get(url)
         .then((result) => {
             res.status(200).json({
-                accounts: result.data
+                accounts: result.data.items
             })
         })
         .catch((error) => {
@@ -22,25 +22,20 @@ const accountsGet = (req, res = response) => {
 const accountGetbyId = (req, res = response) => {
 
     const { id } = req.params;
-    axios
-        .get(`${url}/${id}`)
+    axios.get(`${url}/${id}`)
         .then((result) => {
             res.status(200).json({
                 id: result.data.id,
-                name : result.data.lookupName,
+                name: result.data.lookupName,
                 login: result.data.login,
-                notification: result.data.emailNotification.lookupName,
-                staff: {
-                    id: result.data.staffGroup.id,
-                    name: result.data.staffGroup.lookupName
-                },
+                notification: result.data.emailNotification,
                 perfil: {
                     id: result.data.profile.id,
                     name: result.data.profile.lookupName
                 }
             })
-        })
-        .catch((error) => {
+        }).catch((error) => {
+            console.log(error.message); 
             if (error.response.status === 404) {
                 res.status(404).json({
                     error: `La cuenta ${id} no está registrada`
@@ -59,9 +54,9 @@ const accountPatch = (req, res = response) => {
     axios
         .patch(`${url}/${id}`, {
             "login": req.body.login
-          })
+        })
         .then((result) => {
-            res.status(200).json({  
+            res.status(200).json({
                 msg: `Cuenta ${id} actualizada`,
             })
         })
