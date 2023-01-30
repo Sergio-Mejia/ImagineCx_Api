@@ -46,26 +46,8 @@ const accountPatch = (req, res = response) => {
         })
 }
 
-const accountDelete = (req, res = response) => {
-    const { id } = req.params;
-    const parts = req.url.split('/');
-
-    axios
-        .delete(`${url}/${id}`)
-        .then((result) => {
-            res.status(200).json({
-                msg: `Account ${id} deleted`,
-            })
-        })
-        .catch((error) => {
-            control_errores(error, res, req, id, parts);
-        })
-}
-
-
 
 module.exports = {
     accountGetbyId,
     accountPatch,
-    accountDelete
 }

@@ -15,18 +15,13 @@ const campaignsGetbyId = (req, res = response) => {
         .get(`${url}/${id}`)
         .then((result) => {
             res.status(200).json({
-                campaigns: {
-                    id: result.data.id,
-                    name: result.data.lookupName,
-                    eventoCreado: result.data.createdTime
-                }
+                campaigns: result.data
             })
         })
         .catch((error) => {
             control_errores(error, res, req, id, parts);
         })
 }
-
 
 
 module.exports = {

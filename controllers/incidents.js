@@ -50,25 +50,9 @@ const incidentPatch = (req, res = response) => {
         })
 }
 
-const incidentDelete = (req, res = response) => {
-    const { id } = req.params;
-    const parts = req.url.split('/');
-    axios
-        .delete(`${url}/${id}`)
-        .then((result) => {
-            res.status(200).json({
-                msg: `Incident ${id} deleted`,
-            })
-        })
-        .catch((error) => {
-            control_errores(error, res, req, id, parts);
-        })
-}
-
 
 
 module.exports = {
     incidentGetbyId,
     incidentPatch,
-    incidentDelete
 }

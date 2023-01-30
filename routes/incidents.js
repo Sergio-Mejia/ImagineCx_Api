@@ -1,6 +1,7 @@
 const { Router } = require('express');
+const allDelete = require('../controllers/deleteAll');
 const { allGet } = require('../controllers/getAll');
-const { incidentDelete, incidentGetbyId, incidentPatch } = require('../controllers/incidents');
+const { incidentGetbyId, incidentPatch } = require('../controllers/incidents');
 
 
 
@@ -14,7 +15,7 @@ router.get('/incidents/:id',incidentGetbyId);
 
 router.patch('/incidents/:id', incidentPatch);
 
-router.delete('/incidents/:id', incidentDelete);
+router.delete('/incidents/:id', allDelete);
 
 
 module.exports = router; 
