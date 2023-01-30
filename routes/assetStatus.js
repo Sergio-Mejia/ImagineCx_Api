@@ -1,13 +1,13 @@
 const { Router } = require('express');
-const { assetStatusGet,
-        assetStatusGetbyId } = require('../controllers/assetStatus');
+const {assetStatusGetbyId } = require('../controllers/assetStatus');
+const { allGet } = require('../controllers/getAll');
 
 const router = Router();
 
 
-router.get('/assetStatus', assetStatusGet);
+router.get('/assetStatuses', allGet);
 
-router.get('/assetStatus/:id', assetStatusGetbyId);
+router.get('/assetStatuses/:id', assetStatusGetbyId);
 
 
 module.exports = router; 

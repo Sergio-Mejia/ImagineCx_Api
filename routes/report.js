@@ -1,13 +1,13 @@
 const { Router } = require('express');
-const { reportsGet,
-        reportGetbyId } = require('../controllers/reports');
+const { allGet } = require('../controllers/getAll');
+const { reportGetbyId } = require('../controllers/reports');
 
 const router = Router();
 
 
-router.get('/reports', reportsGet);
+router.get('/analyticsReports', allGet);
 
-router.get('/reports/:id', reportGetbyId);
+router.get('/analyticsReports/:id', reportGetbyId);
 
 
 module.exports = router; 

@@ -5,21 +5,6 @@ const control_errores = require('../helpers/control_errores')
 const url = `https://${process.env.USER}:${process.env.PASSWORD}@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/contacts`;
 
 
-const contactGet = (req, res = response) => {
-    axios
-        .get(url)
-        .then((result) => {
-            res.status(200).json({
-                contacts: result.data.items
-            }) 
-        })
-        .catch((error) => {
-            res.status(500).json({
-                error: error.message
-            })
-        })
-}
-
 
 const contactGetbyId = (req, res = response) => {
 
@@ -87,7 +72,6 @@ const contactDelete = (req, res = response) => {
 
 
 module.exports = {
-    contactGet,
     contactGetbyId,
     contactPatch,
     contactDelete

@@ -1,5 +1,6 @@
 const { Router } = require('express');
-const {contactGet, contactDelete, contactGetbyId, contactPatch } = require('../controllers/contact');
+const { contactDelete, contactGetbyId, contactPatch } = require('../controllers/contact');
+const { allGet } = require('../controllers/getAll');
 
 
 
@@ -7,13 +8,13 @@ const router = Router();
 
 
 
-router.get('/contact', contactGet);
+router.get('/contacts', allGet);
 
-router.get('/contact/:id',contactGetbyId);
+router.get('/contacts/:id',contactGetbyId);
 
-router.patch('/contact/:id', contactPatch);
+router.patch('/contacts/:id', contactPatch);
 
-router.delete('/contact/:id', contactDelete);
+router.delete('/contacts/:id', contactDelete);
 
 
 module.exports = router; 

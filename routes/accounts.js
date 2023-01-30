@@ -1,13 +1,13 @@
 const { Router } = require('express');
-const { accountsGet, 
-        accountGetbyId, 
+const {accountGetbyId, 
         accountPatch, 
         accountDelete } = require('../controllers/accounts');
+const { allGet } = require('../controllers/getAll');
 
 const router = Router();
 
 
-router.get('/accounts', accountsGet);
+router.get('/accounts', allGet);
 
 router.get('/accounts/:id', accountGetbyId);
 

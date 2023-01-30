@@ -5,20 +5,6 @@ const control_errores = require('../helpers/control_errores')
 const url = `https://${process.env.USER}:${process.env.PASSWORD}@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/campaigns`;
 
 
-const campaignsGet = (req, res = response) => {
-    axios
-        .get(url)
-        .then((result) => {
-            res.status(200).json({
-                campaigns: result.data.items
-            })
-        })
-        .catch((error) => {
-            res.status(500).json({
-                error: error.message
-            })
-        })
-}
 
 const campaignsGetbyId = (req, res = response) => {
 
@@ -44,6 +30,5 @@ const campaignsGetbyId = (req, res = response) => {
 
 
 module.exports = {
-    campaignsGet,
     campaignsGetbyId,
 }

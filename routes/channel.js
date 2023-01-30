@@ -1,11 +1,12 @@
 const { Router } = require('express');
-const { channelTypesGet,
+const {
         channelTypesGetbyId } = require('../controllers/channel');
+const { allGet } = require('../controllers/getAll');
 
 const router = Router();
 
 
-router.get('/channelTypes', channelTypesGet);
+router.get('/channelTypes', allGet);
 
 router.get('/channelTypes/:id', channelTypesGetbyId);
 

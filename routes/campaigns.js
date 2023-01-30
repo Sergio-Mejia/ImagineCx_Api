@@ -1,11 +1,12 @@
 const { Router } = require('express');
-const { campaignsGet,
+const {
         campaignsGetbyId } = require('../controllers/campaigns');
+const { allGet } = require('../controllers/getAll');
 
 const router = Router();
 
 
-router.get('/campaigns', campaignsGet);
+router.get('/campaigns', allGet);
 
 router.get('/campaigns/:id', campaignsGetbyId);
 

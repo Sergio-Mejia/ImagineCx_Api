@@ -4,21 +4,6 @@ const axios = require('axios')
 const url = `https://${process.env.USER}:${process.env.PASSWORD}@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/analyticsReports`;
 
 
-const reportsGet = (req, res = response) => {
-    axios
-        .get(url)
-        .then((result) => {
-            res.status(200).json({
-                reports: result.data.items
-            })
-        })
-        .catch((error) => {
-            res.status(500).json({
-                error: error.message
-            })
-        })
-}
-
 const reportGetbyId = (req, res = response) => {
 
     const { id } = req.params;
@@ -49,6 +34,5 @@ const reportGetbyId = (req, res = response) => {
 
 
 module.exports = {
-    reportsGet,
     reportGetbyId,
 }
