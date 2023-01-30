@@ -6,30 +6,6 @@ const url = `https://${process.env.USER}:${process.env.PASSWORD}@imaginecx--tst2
 
 
 
-const contactGetbyId = (req, res = response) => {
-
-    const { id } = req.params;
-    const parts = req.url.split('/');
-    axios
-        .get(`${url}/${id}`)
-        .then((result) => {
-            res.status(200).json({
-                id: result.data.id,
-                name: result.data.lookupName,
-                createdTime: result.data.createdTime,
-                updatedTime: result.data.updatedTime,
-                city: result.data.address.city,
-                address: result.data.address.street,
-                work: result.data.source.lookupName
-            })
-        })
-        .catch((error) => {
-            control_errores(error, res, req, id, parts);
-        })
-}
-
-
-
 const contactPatch = (req, res = response) => {
 
     const { id } = req.params;
@@ -55,6 +31,5 @@ const contactPatch = (req, res = response) => {
 
 
 module.exports = {
-    contactGetbyId,
     contactPatch,
 }
