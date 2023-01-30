@@ -1,5 +1,6 @@
 const { response } = require('express')
 const axios = require('axios')
+const control_errores = require('../helpers/control_errores')
 
 const url = `https://${process.env.USER}:${process.env.PASSWORD}@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/incidents`;
 
@@ -23,6 +24,7 @@ const incidentGet = (req, res = response) => {
 const incidentGetbyId = (req, res = response) => {
 
     const { id } = req.params;
+    const parts = req.url.split('/');
     axios
         .get(`${url}/${id}`)
         .then((result) => {
@@ -38,23 +40,17 @@ const incidentGetbyId = (req, res = response) => {
             })
         })
         .catch((error) => {
-            if (error.response.status === 404) {
-                res.status(404).json({
-                    error: `El incidente ${id} no está registrado`
-                })
-            } else {
-                res.status(500).json({
-                    error: error.message
-                })
-            }
+           control_errores(error, res, req, id, parts);
         })
 }
+
 
 
 
 const incidentPatch = (req, res = response) => {
 
     const { id } = req.params;
+    const parts = req.url.split('/');
     axios
         .patch(`${url}/${id}`, {
             "subject": req.body.subject
@@ -65,20 +61,13 @@ const incidentPatch = (req, res = response) => {
             })
         })
         .catch((error) => {
-            if (error.response.status === 404) {
-                res.status(404).json({
-                    error: `El incidente ${id} no está registrado`
-                })
-            } else {
-                res.status(500).json({
-                    error: error.message
-                })
-            }
+            control_errores(error, res, req, id, parts);
         })
 }
 
 const incidentDelete = (req, res = response) => {
     const { id } = req.params;
+    const parts = req.url.split('/');
     axios
         .delete(`${url}/${id}`)
         .then((result) => {
@@ -87,17 +76,10 @@ const incidentDelete = (req, res = response) => {
             })
         })
         .catch((error) => {
-            if (error.response.status === 404) {    
-                res.status(404).json({
-                    error: `El incident ${id} no está registrado`
-                })
-            } else {
-                res.status(500).json({
-                    error: error.message
-                })
-            }
+            control_errores(error, res, req, id, parts);
         })
 }
+
 
 
 module.exports = {

@@ -1,5 +1,6 @@
 const { response } = require('express')
 const axios = require('axios')
+const control_errores = require('../helpers/control_errores')
 
 const url = `https://${process.env.USER}:${process.env.PASSWORD}@imaginecx--tst2.custhelp.com/services/rest/connect/v1.3/campaigns`;
 
@@ -22,6 +23,8 @@ const campaignsGet = (req, res = response) => {
 const campaignsGetbyId = (req, res = response) => {
 
     const { id } = req.params;
+    const parts = req.url.split('/');
+
     axios
         .get(`${url}/${id}`)
         .then((result) => {
@@ -34,15 +37,7 @@ const campaignsGetbyId = (req, res = response) => {
             })
         })
         .catch((error) => {
-            if (error.response.status === 404) {
-                res.status(404).json({
-                    error: `La campaña ${id} no está registrada`
-                })
-            } else {
-                res.status(500).json({
-                    error: error.message
-                })
-            }
+            control_errores(error, res, req, id, parts);
         })
 }
 
