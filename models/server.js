@@ -35,6 +35,7 @@ class Server {
         this.app.use(this.usersPath, require('../routes/campaigns'));
         this.app.use(this.usersPath, require('../routes/channel'));
         this.app.use(this.usersPath, require('../routes/incidents'));
+        this.app.use(this.usersPath, require('../routes/messageBases'));
 
         // manejo de rutas inexistentes
         this.app.use('*' ,(req, res, next) => {

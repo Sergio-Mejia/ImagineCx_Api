@@ -5,9 +5,9 @@ const allGetbyId = require('../controllers/getByIdAll');
 const router = Router();
 
 
-router.get('/analyticsReports', allGet);
+router.get('/messageBases', allGet);
 
-router.get('/analyticsReports/:id', allGetbyId);
+router.get('/messageBases/:id', allGetbyId);
 
 
 module.exports = router; 

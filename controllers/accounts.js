@@ -32,18 +32,17 @@ const accountPatch = (req, res = response) => {
     const { id } = req.params;
     const parts = req.url.split('/');
 
-    axios
-        .patch(`${url}/${id}`, {
-            "login": req.body.login
+    axios.patch(`${url}/${id}`, {
+        "login": req.body.login
+    })
+    .then((result) => {
+        res.status(200).json({
+            msg: `Cuenta ${id} actualizada`,
         })
-        .then((result) => {
-            res.status(200).json({
-                msg: `Cuenta ${id} actualizada`,
-            })
-        })
-        .catch((error) => {
-            control_errores(error, res, req, id, parts);
-        })
+    })
+    .catch((error) => {
+        control_errores(error, res, req, id, parts);
+    })
 }
 
 
