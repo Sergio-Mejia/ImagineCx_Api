@@ -11,7 +11,7 @@
 * **GET**
   * ``server/api/imaginecx/contacts``: Mostrar todos los contactos registrados
   * ``server/api/imaginecx/contacts/{id}``: Mostrar información del contacto especificado
-* **PUT**
+* **PATCH**
   * ``server/api/imaginecx/contact/{id}``: Actualizar los datos del contacto con el Id solicitado. Los datos se envían a través de un JSON, por ejemplo:
     * ```{"city":"Boston", "postalCode": "02150", "street": "123 Beacon Street"}```
 * **DELETE**:
@@ -21,7 +21,7 @@
 * **GET**
   * ``server/api/imaginecx/accounts``: Mostrar todas las cuentas registradas
   * ``server/api/imaginecx/accounts/{id}``: Mostrar información de la cuenta especificada en el id
-* **PUT**
+* **PATCH**
   * ``server/api/imaginecx/accounts/{id}``: Actualizar los datos de la cuenta con el Id solicitado. Los datos se envían a través de un JSON, por ejemplo:
     * ```{"login": "test2"}```
 * **DELETE**:
@@ -31,7 +31,7 @@
 * **GET**
   * ``server/api/imaginecx/incidents``: Mostrar todos los incidentes registrados
   * ``server/api/imaginecx/incidents/{id}``: Mostrar información del incidente especificado en el id
-* **PUT**
+* **PATCH**
   * ``server/api/imaginecx/incidents/{id}``: Actualizar los datos del incidente con el Id dado. Los datos se envían a traves de un JSON, por ejemplo:
     * ```{"subject": "FishPhone STILL not working"}```
 * **DELETE**:
@@ -41,7 +41,7 @@
 * **GET**
   * ``server/api/imaginecx/organizations``: Mostrar todas las organizaciones registradas
   * ``server/api/imaginecx/organizations/{id}``: Mostrar información de la organización especificada en el id
-* **PUT**
+* **PATCH**
   * ``server/api/imaginecx/organizations/{id}``: Actualizar los datos de la organización con el Id dado. Los datos del body se envían a través de un JSON, por ejemplo:
     * ```{"name": "Oracle Corporation"}```
 * **DELETE**:
